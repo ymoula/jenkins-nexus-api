@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<VerifyJWT async="false" continueOnError="false" enabled="true" name="Verify-JWT-x-signature">
+    <DisplayName>Verify JWT x-signature</DisplayName>
+    <Algorithm>RS256</Algorithm>
+    <Source>request.header.x-signature</Source>
+    <PublicKey>
+        <Value ref="verifyapikey.Verify-API-Key-Token.PublicKey"/>
+    </PublicKey>
+    <Issuer ref="client_id"/>
+    <Subject>api-ag2rlm-token-request</Subject>
+    <IgnoreIssuedAt>true</IgnoreIssuedAt>
+</VerifyJWT>

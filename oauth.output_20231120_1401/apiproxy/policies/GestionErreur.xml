@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<FlowCallout async="false" continueOnError="false" enabled="true" name="GestionErreur">
+    <DisplayName>GestionErreur</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <SharedFlowBundle>sharedFlowErreur</SharedFlowBundle>
+</FlowCallout>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="oauth">
+    <Description/>
+    <FaultRules/>
+    <DefaultFaultRule name="all">
+        <AlwaysEnforce>true</AlwaysEnforce>
+        <Step>
+            <Name>sharedFlowHeaderResponse</Name>
+        </Step>
+        <Step>
+            <Name>GestionErreur</Name>
+        </Step>
+    </DefaultFaultRule>
+    <Flows>
+        <Flow name="token">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>Spike-Arrest-JWKS</Name>
+                </Step>
+                <Step>
+                    <Condition>(virtualhost.name != "tw_secure_aglm")</Condition>
+                    <Name>Decode-JWT-x-signature</Name>
+                </Step>
+                <Step>
+                    <Condition>(virtualhost.name != "tw_secure_aglm")</Condition>
+                    <Name>VerifyIatJWT</Name>
+                </Step>
+                <Step>
+                    <Condition>(virtualhost.name != "tw_secure_aglm") and (VerifyIatJWT == "notYetValid")</Condition>
+                    <Name>Raise-VerifyIatJWT-notYetValid</Name>
+                </Step>
+                <Step>
+                    <Condition>(virtualhost.name != "tw_secure_aglm") and (VerifyIatJWT == false)</Condition>
+                    <Name>Raise-VerifyIatJWT-invalide</Name>
+                </Step>
+                <Step>
+                    <Name>DecodeBaseAuthHeaders</Name>
+                </Step>
+                <Step>
+                    <Condition>(BasicAuthentication.DecodeBaseAuthHeaders.failed == true)</Condition>
+                    <Name>ExtractClientId</Name>
+                </Step>
+                <Step>
+                    <Condition>(virtualhost.name != "tw_secure_aglm")</Condition>
+                    <Name>Verify-API-Key-Token</Name>
+                </Step>
+                <Step>
+                    <Condition>(virtualhost.name != "tw_secure_aglm") and (VerifyIatJWT == true)</Condition>
+                    <Name>Verify-JWT-x-signature</Name>
+                </Step>
+                <Step>
+                    <Name>OAuth-v20</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Condition>(oauthV2.failed != true)</Condition>
+                    <Name>Extract-Variables-Token</Name>
+                </Step>
+                <Step>
+                    <Condition>(oauthV2.failed != true)</Condition>
+                    <Name>Key-Value-Map-Token</Name>
+                </Step>
+                <Step>
+                    <Condition>(oauthV2.failed != true)</Condition>
+                    <Name>Generate-JWT</Name>
+                </Step>
+                <Step>
+                    <Condition>(oauthV2.failed != true)</Condition>
+                    <Name>Response-OAuth</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/token") and (request.verb = "POST")</Condition>
+        </Flow>
+        <Flow name="jwks">
+            <Description>Mise à disposition de la clé publique</Description>
+            <Request>
+                <Step>
+                    <Name>Spike-Arrest-JWKS</Name>
+                </Step>
+                <Step>
+                    <Name>Verify-API-Key</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Name>Key-Value-Map-JWKS</Name>
+                </Step>
+                <Step>
+                    <Name>Assign-Message-JWKS</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/jwks") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="OptionsPreFlight">
+            <Request/>
+            <Response/>
+            <Condition>request.verb == "OPTIONS" AND request.header.origin != null AND request.header.Access-Control-Request-Method != null</Condition>
+        </Flow>
+        <Flow name="404 Not Found">
+            <Description>404 Not Found</Description>
+            <Request>
+                <Step>
+                    <Name>Raise-404</Name>
+                </Step>
+            </Request>
+        </Flow>
+    </Flows>
+    <PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <Name>Key-Value-Map-Cors</Name>
+                <Condition>request.header.origin != null</Condition>
+            </Step>
+        </Request>
+        <Response/>
+    </PreFlow>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response>
+            <Step>
+                <Name>sharedFlowHeaderResponse</Name>
+            </Step>
+        </Response>
+    </PostFlow>
+    <HTTPProxyConnection>
+        <BasePath>/oauth</BasePath>
+        <Properties/>
+        <VirtualHost>secure_aglm</VirtualHost>
+        <VirtualHost>tw_secure_aglm</VirtualHost>
+    </HTTPProxyConnection>
+    <RouteRule name="noroute"/>
+</ProxyEndpoint>

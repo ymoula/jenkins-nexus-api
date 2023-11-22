@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<VerifyAPIKey async="false" continueOnError="false" enabled="true" name="Verify-API-Key-Token">
+    <DisplayName>Verify API Key Token</DisplayName>
+    <!--<APIKey ref="jwt.Decode-JWT-x-signature.decoded.claim.iss"/>-->
+    <APIKey ref="client_id"/>
+</VerifyAPIKey>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="Response-OAuth">
+    <DisplayName>Response OAuth</DisplayName>
+    <Properties/>
+    <Set>
+        <Payload contentType="application/json" variablePrefix="@" variableSuffix="#">{
+    "organization_name": "@organization.name#",
+    "token_type": "@token_type#",
+    "issued_at": "@issued_at#",
+    "client_id": "@client_id#",
+    "access_token": "@jwt-variable#",
+    "scope": "@scope#",
+    "expires_in": "@expires_in#"
+}</Payload>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="request"/>
+</AssignMessage>

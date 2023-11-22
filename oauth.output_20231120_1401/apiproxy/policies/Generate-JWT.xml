@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<GenerateJWT async="false" continueOnError="false" enabled="true" name="Generate-JWT">
+    <DisplayName>Generate JWT</DisplayName>
+    <Algorithm>RS256</Algorithm>
+    <PrivateKey>
+        <Value ref="private.private_key"/>
+    </PrivateKey>
+    <Issuer ref="organization.name"/>
+    <Subject>api-ag2rlm-oauth2-token</Subject>
+    <Audience ref="apigee.developer.app.name"/>
+    <AdditionalClaims>
+        <Claim name="access_token" type="string" ref="access_token"/>
+    </AdditionalClaims>
+    <OutputVariable>jwt-variable</OutputVariable>
+</GenerateJWT>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<KeyValueMapOperations async="false" continueOnError="false" enabled="true" name="Key-Value-Map-Token" mapIdentifier="oauth">
+    <DisplayName>Key Value Map Token</DisplayName>
+    <Properties/>
+    <Get assignTo="private.private_key" index="1">
+        <Key>
+            <Parameter>private_key</Parameter>
+        </Key>
+    </Get>
+    <Scope>environment</Scope>
+</KeyValueMapOperations>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<KeyValueMapOperations async="false" continueOnError="false" enabled="true" name="Key-Value-Map-Cors" mapIdentifier="cors">
+    <DisplayName>Key Value Map Cors</DisplayName>
+    <Get assignTo="cors.domain" index="1">
+        <Key>
+            <Parameter>domain</Parameter>
+        </Key>
+    </Get>
+</KeyValueMapOperations>

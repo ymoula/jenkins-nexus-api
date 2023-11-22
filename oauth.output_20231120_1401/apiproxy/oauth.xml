@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="18" name="oauth">
+    <Basepaths>/oauth</Basepaths>
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1648045495684</CreatedAt>
+    <CreatedBy>antoine.colart@ag2rlamondiale.fr</CreatedBy>
+    <Description>Gestion de l'Oauth 2.0</Description>
+    <DisplayName>oauth</DisplayName>
+    <LastModifiedAt>1648045495684</LastModifiedAt>
+    <LastModifiedBy>antoine.colart@ag2rlamondiale.fr</LastModifiedBy>
+    <ManifestVersion>SHA-512:a854603924ef8b21b804a3059fe8a6019b85b9c6694eabbb8e78aa823bccafa300380579b02c0d1db5c58262390ec9272675d99309b3c5706faf4fe08d43357f:eu-west-1</ManifestVersion>
+    <Policies>
+        <Policy>Assign-Message-JWKS</Policy>
+        <Policy>Decode-JWT-x-signature</Policy>
+        <Policy>DecodeBaseAuthHeaders</Policy>
+        <Policy>Extract-Variables-Token</Policy>
+        <Policy>ExtractClientId</Policy>
+        <Policy>Generate-JWT</Policy>
+        <Policy>GestionErreur</Policy>
+        <Policy>Key-Value-Map-Cors</Policy>
+        <Policy>Key-Value-Map-JWKS</Policy>
+        <Policy>Key-Value-Map-Token</Policy>
+        <Policy>OAuth-v20</Policy>
+        <Policy>Raise-404</Policy>
+        <Policy>Raise-VerifyIatJWT-invalide</Policy>
+        <Policy>Raise-VerifyIatJWT-notYetValid</Policy>
+        <Policy>Response-OAuth</Policy>
+        <Policy>Spike-Arrest-JWKS</Policy>
+        <Policy>Verify-API-Key-Token</Policy>
+        <Policy>Verify-API-Key</Policy>
+        <Policy>Verify-JWT-x-signature</Policy>
+        <Policy>VerifyIatJWT</Policy>
+        <Policy>sharedFlowHeaderResponse</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>oauth</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>jsc://VerifyIatJWT.js</Resource>
+    </Resources>
+    <Spec></Spec>
+    <TargetServers/>
+    <TargetEndpoints/>
+</APIProxy>
